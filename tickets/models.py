@@ -19,6 +19,7 @@ class ConcertCategory(models.Model):
         verbose_name = "concert category"
         verbose_name_plural = "concert categories"
         ordering = ["-name"]
+        # By providing the ordering attribute the categories are now ordered by name.
 
     def __str__(self):
         return f"{self.name}"

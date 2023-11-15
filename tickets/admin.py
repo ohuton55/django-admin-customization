@@ -62,7 +62,7 @@ class ConcertAdmin(admin.ModelAdmin):
         return f"${obj.price}"
 
     display_price.short_description = "Price"
-    display_price.admin_order_field = "price"
+    display_price.admin_order_field = "price" # to tell Django by what field this column is orderable.
 
     def display_venue(self, obj):
         link = reverse("admin:tickets_venue_change", args=[obj.venue.id])
@@ -83,7 +83,7 @@ def deactivate_tickets(modeladmin, request, queryset):
 
 class TicketAdmin(DjangoQLSearchMixin, ImportExportActionModelAdmin):
     list_display = ["customer_full_name", "concert", "payment_method", "paid_at", "is_active"]
-    list_select_related = ["concert", "concert__venue"]
+    list_select_related = ["concert", "concert__venue"] # to avoid N + 1
     actions = [activate_tickets, deactivate_tickets]
     form = TicketAdminForm
 
